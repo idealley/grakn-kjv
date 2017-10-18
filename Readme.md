@@ -1,15 +1,20 @@
-# GraKn King James Project
-This project aims at testing the functionalities of Grakn
-    1. Relations between books, chapters, verses and words
-    2. Relations between topics and verses
-    3. Cross references (Verses speaking of other verses or refering to)
-    4. Relation among people and places
-    5. Relation among people
-    6. Inferences
-    7. CSV imports
-    8. JSON imports
-    9. Templates
-    10. etc.
+# GAKN.AI - King James Bible Project
+This project aims at testing the functionalities of [GRAKN.AI](https://grakn.ai/)
+1. Relations between books, chapters, verses and words
+2. Relations between topics and verses
+3. Cross references (Verses speaking of other verses or refering to)
+4. Relation among people and places
+5. Relation among people
+6. Inferences
+7. CSV imports
+8. JSON imports
+9. Templates
+10. etc.
+
+Then
+1. Use of inference rules (Already working)
+2. Implementation of a basic recommendataion engine
+3. Why not generate inference rules with ML
 
 ## Ontology migration
 the `bible.gql` file is the original ontology, loaded in the graph. I wanted to experiment and improve the ontology, for it to look like `bible-latest.gql` but this version of the file, removes `plays <role>` from the `person` entity and causes out of memory exceptions. Thus I tried with the `bible-updated.gql`, which leaves the `plays <role>` but that too out of memor exceptions
@@ -23,6 +28,7 @@ Prepares some data for import. To regenerate the files just run
 ```
 
 ## Import steps
+This will be optimized and an import script written. Some of thoses steps could be added in templates.
 
 1. `graql.sh -f ./ontology/bible.gql`
 2. `graql.sh`
