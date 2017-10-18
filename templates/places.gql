@@ -1,0 +1,8 @@
+insert
+    $x isa place
+        has place-id @long(<PlaceID>)
+        has name <PlaceName>
+        has root <Root>
+        has comment <Comment>
+        has latitude @double(<Lat>)
+        has longitude @double(<Lon>);

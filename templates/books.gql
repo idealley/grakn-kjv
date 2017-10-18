@@ -1,0 +1,14 @@
+insert
+    $x isa book 
+        has book-id @long(<BookID>)
+        has name <BookName>
+        has short-name <ShortName>
+        has osis-name <OsisName>
+        has book-division <BookDiv>
+        has number-of-chapters @long(<NumOfChapters>);
+
+match
+    $x isa bible, has short-name "KJV";
+    $y isa book, has book-id @long(<BookID>);
+insert
+   (bible-role: $x, book-role:$y) isa belongs;

@@ -1,0 +1,11 @@
+insert
+    $x isa person
+        has person-id @long(<PersonID>)
+        has name <Name>
+        has surname <Surname>
+        has is-propername @long(<IsProperName>)
+        has gender <Gender>
+        has birth-year <BirthYear>
+        has death-year <DeathYear>
+        has birth-place <BirthPlace>
+        has death-place <DeathPlace>;

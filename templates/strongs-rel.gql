@@ -1,0 +1,5 @@
+match
+    $s isa strongs, has strongs-id <StrongsID>;
+    $w isa word, has word-id @long(<WordID>);
+insert
+    (strongs-reference: $s, word-reference:  $w) isa reference;

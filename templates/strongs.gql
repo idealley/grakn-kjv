@@ -1,0 +1,9 @@
+insert
+    $s isa strongs
+        has strongs-id <StrongsID>
+        has lemma <lemma>
+        has xlit <xlit>
+        has pronounciation <pronounce>
+        has description <description>
+        has part-of-speech <PartOfSpeech>
+        has language <Language>;

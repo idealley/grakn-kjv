@@ -1,0 +1,5 @@
+appendonly.aof
+dump.rdb
+*.log.gz
+data-parser/node_modules
+node_modules

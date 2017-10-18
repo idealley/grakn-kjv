@@ -1,0 +1,5 @@
+match
+    $t isa topic, has topic-id @long(<TopicID>);
+    $v isa verse, has verse-id @long(<VerseID>);
+insert
+    (topic-reference:$t, verse-reference:$v) isa reference;

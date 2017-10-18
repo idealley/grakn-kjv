@@ -1,0 +1,481 @@
+insert
+
+############################################
+#                                          #
+#                 Entities                 #
+#                                          #
+############################################
+
+## Bibles
+bible sub entity
+    plays bible-role
+
+    has name
+    has short-name
+    has language
+    has language-code
+    has publication-year;
+
+
+book sub entity
+    plays book-role
+    plays previous-book
+    plays next-book
+    plays original
+
+    has book-id
+    has number-of-chapters
+    has book-division
+    has name
+    has short-name
+    has osis-name;
+
+chapter sub entity
+    plays chapter-role
+    plays previous-chapter
+    plays next-chapter
+    plays authored
+
+    has chapter-unique-id
+    has chapter-id
+    has book-id;
+
+verse sub entity
+    plays verse-role
+    plays previous-verse
+    plays next-verse
+    plays verse1
+    plays verse2
+    plays verse-reference
+
+    has verse-id
+    has text
+    has osis-reference; 
+
+word sub entity
+    plays word-role
+    plays word-reference
+
+    has word-id
+    has word-text
+    has verse-position
+    has punctuation
+    has italic
+    has closing-parenthesis
+    has opening-parenthesis
+    has syllables
+    has year;
+
+## People
+person sub entity
+    plays writer
+    plays original
+    plays member
+    plays child
+    plays grandchild
+    plays grandparent
+    plays cousin
+    plays cousin1
+    plays cousin2
+    plays sibling
+    plays sibling1
+    plays sibling2
+    plays spouseOrConcubine1
+    plays spouseOrConcubine2
+    plays halfSiblingSameFather1
+    plays halfSiblingSameFather2
+    plays halfSiblingSameMother1
+    plays halfSiblingSameMother2   
+    plays person-reference
+
+    has person-id
+    has name
+    has surname
+    has is-propername
+    has birth-year
+    has death-year
+    has birth-place
+    has death-place;
+
+man sub entity person
+    plays father
+    plays son
+    plays grandfather
+    plays grandson
+
+    has gender;
+
+woman sub entity person
+    plays mother
+    plays daughter
+    plays grandmother
+    plays granddaughter
+    
+    has gender;
+
+
+## Groups
+people-group sub entity
+    plays membership
+    
+    has name;
+
+## Places
+place sub entity
+    plays original
+    plays place-reference
+
+    has place-id
+    has name
+    has root
+    has comment
+    has latitude
+    has longitude;
+
+## Aliases (for books, person, places, etc.)
+alias sub entity
+    plays aliased
+
+    has name;
+
+## Strongs ref 
+strongs sub entity
+    plays strongs-reference
+
+    has strongs-id
+    has lemma
+    has xlit
+    has pronounciation
+    has description
+    has part-of-speech
+    has language;
+
+
+## Topics
+topic sub entity
+    plays topic-reference
+
+    has topic-id
+    has topic-text
+    has subtopic;
+
+############################################
+#                                          #
+#                Resources                 #
+#                                          #
+############################################
+
+name sub resource, datatype string;
+short-name sub resource, datatype string;
+year sub resource, datatype long;
+description sub resource, datatype string;
+
+## Bible specific
+language sub resource, datatype string;
+language-code sub resource, datatype string;
+publication-year sub resource, datatype long;
+
+## Book specific
+number-of-chapters sub resource, datatype long;
+book-division sub resource, datatype string;
+osis-name sub resource, datatype string;
+book-id sub resource, datatype long;
+
+## Chapter specific
+osis-reference sub resource, datatype string;
+chapter-id sub resource, datatype long;
+chapter-unique-id sub resource, datatype string;
+latitude sub resource, datatype double;
+longitude sub resource, datatype double;
+
+## People specific
+person-id sub resource, datatype long;
+surname sub resource, datatype string;
+is-propername sub resource, datatype long;
+gender sub resource, datatype string;
+birth-year sub resource, datatype string;
+death-year sub resource, datatype string;
+birth-place sub resource, datatype string; # this will need to be link to places
+death-place sub resource, datatype string; # this also
+
+## Place specific
+place-id sub resource, datatype long;
+root sub resource, datatype string;
+comment sub resource, datatype string;
+
+## Verse specific
+verse-id sub resource, datatype long;
+text sub resource, datatype string;
+
+## Word specific
+word-id sub resource, datatype long;
+word-text sub resource, datatype string;
+verse-position sub resource datatype long;
+punctuation sub resource, datatype string;
+italic sub resource, datatype long;
+closing-parenthesis sub resource, datatype long;
+opening-parenthesis sub resource, datatype long;
+syllables sub resource, datatype long;
+
+## Strongs specific
+strongs-id sub resource, datatype string;
+lemma sub resource, datatype string;
+xlit sub resource, datatype string;
+pronounciation sub resource, datatype string;
+part-of-speech sub resource, datatype string;
+
+## Topic specific
+topic-id sub resource, datatype long;
+topic-text sub resource, datatype string;
+subtopic sub resource, datatype string;
+
+############################################
+#                                          # 
+#                Relations                 #
+#                                          #
+############################################
+
+belongs sub relation
+    relates bible-role
+    relates book-role
+    relates chapter-role
+    relates verse-role
+    relates word-role
+    relates membership
+    relates member;
+
+next sub relation
+    relates previous-book
+    relates next-book
+    relates previous-chapter
+    relates next-chapter
+    relates previous-verse
+    relates next-verse;
+
+written sub relation
+    relates writer
+    relates authored;
+
+is-aliased sub relation
+    relates original
+    relates aliased;
+
+reference sub relation
+    relates strongs-reference
+    relates word-reference
+    relates topic-reference
+    relates verse-reference
+    relates place-reference
+    relates person-reference;
+
+cross-reference sub relation
+    relates verse1
+    relates verse2;
+
+relatives sub relation
+    relates spouseOrConcubine1
+    relates spouseOrConcubine2;
+
+parentship sub relation
+    relates parent
+    relates child
+    relates father
+    relates mother
+    relates son
+    relates daughter;
+
+siblings sub relation
+    relates sibling  # TODO, deal with this role properly
+    relates sibling1
+    relates sibling2
+    relates halfSiblingSameMother1
+    relates halfSiblingSameMother2
+    relates halfSiblingSameFather1
+    relates halfSiblingSameFather2;
+
+cousins sub relation
+    relates cousin  # TODO, deal with this role properly
+    relates cousin1
+    relates cousin2;
+
+# This will need to be infered
+grandparentship sub relation
+	relates grandparent
+	relates grandfather
+	relates grandmother
+	relates grandchild
+	relates granddaughter
+	relates grandson;
+
+############################################
+#                                          #
+#                  Roles                   #
+#                                          #
+############################################
+
+bible-role sub role;
+book-role sub bible-role;
+chapter-role sub book-role;
+verse-role sub chapter-role;
+word-role sub verse-role;
+
+previous-book sub role;
+next-book sub role;
+previous-chapter sub role;
+next-chapter sub role;
+previous-verse sub role;
+next-verse sub role;
+
+authored sub role;
+writer sub role;
+
+original sub role;
+aliased sub role;
+
+member sub role;
+membership sub role;
+verse1 sub role;
+verse2 sub role;
+
+spouseOrConcubine1 sub role;
+spouseOrConcubine2 sub role;
+
+sibling sub role;
+sibling1 sub sibling;
+sibling2 sub sibling;
+halfSiblingSameFather1 sub sibling;
+halfSiblingSameFather2 sub sibling;
+halfSiblingSameMother1 sub sibling;
+halfSiblingSameMother2 sub sibling;
+
+parent sub role;
+mother sub parent;
+father sub parent;
+
+child sub role;
+son sub child;
+daughter sub child;
+
+strongs-reference sub role;
+word-reference sub role;
+topic-reference sub role;
+verse-reference sub role;
+person-reference sub role;
+place-reference sub role;
+
+grandparent sub role;
+grandfather sub grandparent;
+grandmother sub grandparent;
+grandchild sub role;
+grandson sub grandchild;
+granddaughter sub grandchild;
+
+cousin sub role;
+cousin1 sub cousin;
+cousin2 sub cousin;
+
+############################################
+#                                          #
+#            Inference Rules               #
+#                                          #
+############################################
+
+
+$genderizeParentships1 isa inference-rule
+when {
+    (parent: $p, child: $c) isa parentship;
+    $p has gender "M";
+    $c has gender "M";
+}
+then {
+    (father: $p, son: $c) isa parentship;
+};
+
+$genderizeParentships2 isa inference-rule
+when {
+    (parent: $p, child: $c) isa parentship;
+    $p has gender "M";
+    $c has gender "F";
+}
+then {
+    (father: $p, daughter: $c) isa parentship;
+};
+
+$genderizeParentships3 isa inference-rule
+when {
+    (parent: $p, child: $c) isa parentship;
+    $p has gender "F";
+    $c has gender "M";
+}
+then {
+    (mother: $p, son: $c) isa parentship;
+};
+
+$genderizeParentships4 isa inference-rule
+when {
+    (parent: $p, child: $c) isa parentship;
+    $p has gender "F";
+    $c has gender "F";
+}
+then {
+    (mother: $p, daughter: $c) isa parentship;
+};
+
+$grandParents1 isa inference-rule
+when {
+    ($p, son: $gc) isa parentship;
+    (father: $gp, $p) isa parentship;
+}
+then {
+    (grandfather: $gp, grandson: $gc) isa grandparentship;
+};
+
+$grandParents2 isa inference-rule
+when {
+    ($p, daughter: $gc) isa parentship;
+    (father: $gp, $p) isa parentship;
+}
+then {
+    (grandfather: $gp, granddaughter: $gc) isa grandparentship;
+};
+
+$grandParents3 isa inference-rule
+when {
+    ($p, daughter: $gc) isa parentship;
+    (mother: $gp, $p) isa parentship;
+}
+then {
+    (grandmother: $gp, granddaughter: $gc) isa grandparentship;
+};
+
+$grandParents4 isa inference-rule
+when {
+    ($p, son: $gc) isa parentship;
+    (mother: $gp, $p) isa parentship;
+}
+then {
+    (grandmother: $gp, grandson: $gc) isa grandparentship;
+};
+
+
+$peopleWithSameParentsAreSiblings isa inference-rule
+when {
+    (mother: $m, $x) isa parentship;
+    (mother: $m, $y) isa parentship;
+    (father: $f, $x) isa parentship;
+    (father: $f, $y) isa parentship;
+    $x != $y;
+} 
+then {
+    (sibling1: $x, sibling2: $y) isa siblings;
+};
+
+$peopleWithSiblingsParentsAreCousins isa inference-rule
+when {
+    (parent: $p, child: $c1) isa parentship;
+    ($p, $p2) isa siblings;
+    (parent: $p2, child: $c2) isa parentship;
+}
+then {
+    (cousin1: $c1, cousin2: $c2) isa cousins;
+};

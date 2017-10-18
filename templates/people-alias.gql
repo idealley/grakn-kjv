@@ -1,0 +1,5 @@
+match
+    $p isa person, has person-id @long(<PersonID>);
+insert
+    $a isa alias, has name <Alias>;
+    (original: $p, aliased: $a) isa is-aliased;

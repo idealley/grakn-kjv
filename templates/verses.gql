@@ -1,0 +1,13 @@
+insert
+    $x isa verse
+        has verse-id @long(<VerseID>)
+        has text <VerseText>
+        has osis-reference <OsisRef>;
+
+match 
+    $x isa verse has verse-id @long(<VerseID>); 
+    $y isa chapter
+        has chapter-id @long(<Chapter>) 
+        has book-id @long(<BookID>);
+insert
+    (verse-role: $x, chapter-role: $y) isa belongs;

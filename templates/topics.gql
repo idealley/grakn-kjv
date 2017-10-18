@@ -1,0 +1,5 @@
+insert
+    $x isa topic
+        has topic-id @long(<TopicID>)
+        has topic-text <Topic>
+        has subtopic <Subtopic>;

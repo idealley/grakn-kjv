@@ -1,0 +1,78 @@
+for (<relations>) do {
+    if ((<type1> = "father") and (<type2> = "child")) do {
+    match
+        $a isa person, has person-id @long(<primary>);
+        $b isa person, has person-id @long(<related>);
+
+    insert 
+        (father:$a, child:$b) isa parentship;
+        (parent:$a, child:$b) isa parentship;
+    }
+
+    if ((<type1> = "child") and (<type2> = "father")) do {
+    match
+        $a isa person, has person-id @long(<primary>);
+        $b isa person, has person-id @long(<related>);
+
+    insert 
+        (child:$a, father:$b) isa parentship;
+        (child:$a, parent:$b) isa parentship;
+    }
+
+    if ((<type1> = "mother") and (<type2> = "child")) do {
+    match
+        $a isa person, has person-id @long(<primary>);
+        $b isa person, has person-id @long(<related>);
+
+    insert 
+        (mother:$a, child:$b) isa parentship;
+        (parent:$a, child:$b) isa parentship;
+    }
+
+    if ((<type1> = "child") and (<type2> = "mother")) do {
+    match
+        $a isa person, has person-id @long(<primary>);
+        $b isa person, has person-id @long(<related>);
+
+    insert 
+        (child:$a, mother:$b) isa parentship;
+        (child:$a, parent:$b) isa parentship;
+    }
+
+    if (<type1> = "sibling") do {
+    match
+        $a isa person, has person-id @long(<primary>);
+        $b isa person, has person-id @long(<related>);
+
+    insert     
+        (sibling1:$a, sibling2:$b) isa siblings;
+    }
+
+    if (<type1> = "halfSiblingSameMother" ) do {
+    match
+        $a isa person, has person-id @long(<primary>);
+        $b isa person, has person-id @long(<related>);
+
+    insert 
+        (halfSiblingSameMother1:$a, halfSiblingSameMother2:$b) isa siblings;
+    }
+
+    if (<type1> = "halfSiblingSameFather") do {
+    match
+        $a isa person, has person-id @long(<primary>);
+        $b isa person, has person-id @long(<related>);
+
+    insert 
+        (halfSiblingSameFather1:$a, halfSiblingSameFather2:$b) isa siblings;
+    }
+
+    if (<type1> = "spouseOrConcubine") do {
+    match
+        $a isa person, has person-id @long(<primary>);
+        $b isa person, has person-id @long(<related>);
+
+    insert     
+        (spouseOrConcubine1:$a, spouseOrConcubine2:$b) isa relatives;
+    }
+}
+    

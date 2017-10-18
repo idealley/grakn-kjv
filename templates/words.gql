@@ -1,0 +1,33 @@
+insert
+    $x isa word
+        has word-id @long(<WordID>)
+        has word-text <Word>
+        has verse-position @long(<VersePos>)
+        has punctuation <Punc>
+        has italic @long(<Italic>)
+        has closing-parenthesis @long(<cParen>)
+        has opening-parenthesis @long(<oParen>)
+        has syllables @long(<Syllables>)
+        has year @long(<YearNum>);
+
+match 
+    $x isa word, has word-id @long(<WordID>);
+    $y isa verse, has verse-id @long(<VerseID>);
+insert
+    (word-role: $x, verse-role:$y) isa belongs;
+
+if (@long(<PersonID>) > 0) do {
+    match 
+        $p isa person, has person-id @long(<PersonID>);
+        $w isa word, has word-id @long(<WordID>);
+    insert
+        (person-reference: $p, word-reference: $w) isa reference;    
+}
+
+if (@long(<PlaceID>) > 0) do {
+    match 
+        $p isa place, has place-id @long(<PlaceID>);
+        $w isa word, has word-id @long(<WordID>);
+    insert
+        (place-reference: $p, word-reference: $w) isa reference;    
+}

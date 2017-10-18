@@ -1,0 +1,5 @@
+match
+    $b isa book, has book-id @long(<BookID>);
+insert
+    $a isa alias, has name <Alias>;
+    (original: $b, aliased: $a) isa is-aliased;

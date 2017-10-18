@@ -1,0 +1,6 @@
+match
+    $p isa person
+        has person-id @long(<PersonID>);
+    $g isa people-group  has name <GroupName>;
+insert
+    (membership: $g, member: $p) isa belongs;

@@ -1,0 +1,22 @@
+insert
+for (b in <books>) do {         
+    for (c in <b.chapters>) do {
+    $x isa chapter   
+            has chapter-unique-id <c.unique>
+            has book-id @long(<c.bookId>)
+            has chapter-id @long(<c.chap>);    
+    } 
+}
+
+# for(b in <books>) do { 
+# match
+#   $book isa book has  book-id @long(@split(<c.unique>, '.')[0])};
+# insert
+#     for (c in <b.chapters>) do {
+#     $chapter isa chapter   
+#             has chapter-unique-id <c.unique>
+#             has chapter-id @long(<c.chap>);
+#   (book-role: $book, chapter-role:$chapter) isa belongs;
+#     } 
+# }
+

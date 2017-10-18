@@ -1,0 +1,9 @@
+match
+for (<relations>) do {
+    $p isa verse, has verse-id @long(<previous-verse>);
+    $c isa verse, has verse-id @long(<current>);
+    $n isa verse, has verse-id @long(<next-verse>);
+    insert
+        (previous-verse: $p, next-verse: $c) isa next;
+        (previous-verse:$c, next-verse:$n) isa next;
+}
