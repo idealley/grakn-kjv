@@ -16,7 +16,6 @@ bible sub entity
     has language-code
     has publication-year;
 
-
 book sub entity
     plays book-role
     plays previous-book
